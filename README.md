@@ -2,6 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+https://developer.adobe.com/document-services/docs/overview/pdf-embed-api/gettingstarted/
+ 
+https://acrobatservices.adobe.com/dc-integration-creation-app-cdn/main.html?api=pdf-embed-api
+ 
+https://github.com/adobe/pdf-embed-api-samples
+ 
+https://developer.adobe.com/console/3366591/home
+ 
+https://developer.adobe.com/developer-support/
+ 
+adobe pdf
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -44,3 +57,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
