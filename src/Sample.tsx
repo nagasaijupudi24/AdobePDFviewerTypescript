@@ -1,66 +1,62 @@
+import { useCallback, useState } from 'react';
+import { useResizeObserver } from '@wojtekmaj/react-hooks';
+import { pdfjs, Document, Page } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
 
-import AdobePdfViewer from "./adobePdf";
-// import { useCallback, useState } from 'react';
-// import { useResizeObserver } from '@wojtekmaj/react-hooks';
-// import { pdfjs, Document, Page } from 'react-pdf';
-// import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-// import 'react-pdf/dist/esm/Page/TextLayer.css';
+import './Sample.css';
 
-// import './Sample.css';
+import type { PDFDocumentProxy } from 'pdfjs-dist';
 
-// import type { PDFDocumentProxy } from 'pdfjs-dist';
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
+const options = {
+  cMapUrl: '/cmaps/',
+  standardFontDataUrl: '/standard_fonts/',
+};
 
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   'pdfjs-dist/build/pdf.worker.min.mjs',
-//   import.meta.url,
-// ).toString();
+const resizeObserverOptions = {};
 
-// const options = {
-//   cMapUrl: '/cmaps/',
-//   standardFontDataUrl: '/standard_fonts/',
-// };
+const maxWidth = 800;
 
-// const resizeObserverOptions = {};
-
-// const maxWidth = 800;
-
-// type PDFFile = string | File | null;
+type PDFFile = string | File | null;
 
 export default function Sample() {
-  // const [file, setFile] = useState<PDFFile>('./sample.pdf');
-  // const [numPages, setNumPages] = useState<number>();
-  // const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
-  // const [containerWidth, setContainerWidth] = useState<number>();
+  const [file, setFile] = useState<PDFFile>('./sample.pdf');
+  const [numPages, setNumPages] = useState<number>();
+  const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
+  const [containerWidth, setContainerWidth] = useState<number>();
 
-  // const onResize = useCallback<ResizeObserverCallback>((entries) => {
-  //   const [entry] = entries;
+  const onResize = useCallback<ResizeObserverCallback>((entries) => {
+    const [entry] = entries;
 
-  //   if (entry) {
-  //     setContainerWidth(entry.contentRect.width);
-  //   }
-  // }, []);
+    if (entry) {
+      setContainerWidth(entry.contentRect.width);
+    }
+  }, []);
 
-  // useResizeObserver(containerRef, resizeObserverOptions, onResize);
+  useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
-  // function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
-  //   const { files } = event.target;
+  function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    const { files } = event.target;
 
-  //   const nextFile = files?.[0];
+    const nextFile = files?.[0];
 
-  //   if (nextFile) {
-  //     setFile(nextFile);
-  //   }
-  // }
+    if (nextFile) {
+      setFile(nextFile);
+    }
+  }
 
-  // function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {
-  //   setNumPages(nextNumPages);
-  // }
+  function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {
+    setNumPages(nextNumPages);
+  }
 
   return (
     <div className="Example">
-      <AdobePdfViewer clientId={"825473e9e1184eL459736428fd30f8b99"} fileUrl="https://cdn.codewithmosh.com/image/upload/v1721763853/guides/web-roadmap.pdf" defaultViewMode={"FIT_WIDTH"}/>
-      {/* <header>
+      <header>
         <h1>react-pdf sample page</h1>
       </header>
       <div className="Example__container">
@@ -79,7 +75,7 @@ export default function Sample() {
             ))}
           </Document>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
